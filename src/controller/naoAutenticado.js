@@ -21,11 +21,12 @@ function renderLogin(){
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" style="border-radius: 20px;" required>
                         </div>
-                        <center><button style="border-radius: 20px; width: 150px; height: auto;" type="submit" class="btn btn-primary">Login</button></center>
+                        <center><button style="border-radius: 20px; width: 150px; height: auto;" type="button" class="btn btn-primary" onclick='login();'>Login</button></center>
                     </div></center>
                 </form>
             </div>
-        </div>`);
+        </div>
+        `);
 }
 
 function renderRegisto(){
@@ -98,7 +99,7 @@ function renderRegisto(){
                         </div>
 
                         <div class="col-sm-12 justify-content-center mt-4">
-                            <center><button type="button" class="col-sm-6 btn btn-primary" style="border-radius: 30px;" onclick='console.log("criar conta");'>Criar conta</button></center>
+                            <center><button type="button" class="col-sm-6 btn btn-primary" style="border-radius: 30px;" onclick='cConta();'>Criar conta</button></center>
                         </div>
                     </div>
                 </form>
@@ -115,7 +116,7 @@ function validacao() {
   
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener('submit', function (event) {
+        form.addEventListener('click', function (event) {
           if (!form.checkValidity()) {
             event.preventDefault()
             event.stopPropagation()
@@ -163,13 +164,14 @@ async function fillConcelhos(){
 }
 
 
-function cConta(){
+async function cConta(){
     const options = {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
         body: JSON.stringify({
+            tipoConta:"admin",
             email: document.getElementById("email").value,
             password: document.getElementById("password").value,
             nome: document.getElementById("nome").value,
@@ -177,7 +179,7 @@ function cConta(){
         })
     }
 
-    fetch('http://localhost:3000/api/empresas', options)
+    await fetch('http://localhost:3000/api/users', options)
     .then(res => res.text())
     .then(text =>{
         alert(text)
@@ -186,12 +188,9 @@ function cConta(){
         alert("Ocorreu um erro na efetuação do seu registo");
         alert(err);
     })
+    location.reload()
 }
 
-function openModal(id) {
-    var myModal = new bootstrap.Modal(document.getElementById(id), {  keyboard: false });
-    myModal.show();
-  }
 
   /*                        <div class="col-sm-6 mt-1">
                             <label for="ilha" class="form-label">Ilha</label>
@@ -215,4 +214,5 @@ function openModal(id) {
                         <div class="col-sm-6 mt-1">
                             <label for="nRua" class="form-label">Nº Porta</label>
                             <input type="text" class="form-control" id="numero" maxlength="10" required>
-                        </div> */
+                        </div> 
+                        */

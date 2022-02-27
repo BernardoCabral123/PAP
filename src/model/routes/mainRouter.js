@@ -3,9 +3,9 @@ const path = require("path");
 const express = require("express");
 const router = express.Router();
 
-router.use("/api",require("./apiRoutes/apiRouter"));
+router.use("/api",require("./apiRouter"));
 
-router.use("/files",require("./fileRoutes/fileRouter"));
+router.use("/files",require("./fileRouter"));
 
 router.get("/",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/html/indexPage.html"));
