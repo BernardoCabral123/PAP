@@ -89,4 +89,15 @@ router.get('/concelhos/:id', function(req, res) {
         } 
   });
 });
+
+router.get(`/areas`,(req,res)=>{
+    dbConnection.query("SELECT * FROM area;",(err,result)=>{
+        if(err){
+            console.log("falha na execucao do query")
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
 module.exports = router;

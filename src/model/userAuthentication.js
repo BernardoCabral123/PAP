@@ -31,7 +31,7 @@ exports.getTipoConta = (req,res) => {
         )
     }
     catch(error){
-        res.json({msg:'Ocorreu um erro'})
+        res.status(401).json();
     }
 }
 

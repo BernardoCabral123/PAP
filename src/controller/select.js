@@ -24,34 +24,9 @@ async function renderContent1(){
                 return res.json()
             }
             else{
-                localStorage.removeItem(token);
-                renderCode("navbar",`
-                <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
-                    <div class="container-fluid">
-                        <div class="ml-5"  onclick='location.reload();'>
-                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
-                        </div>
-                        
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
-                            <ul class="navbar-nav" style="cursor: pointer;">
-                                <li class="nav-item" onclick="location.reload();;">
-                                    <a class="nav-link">Inicio</a>
-                                </li>
-                                <li class="nav-item" onclick="renderDuvidas();">
-                                    <a class="nav-link" >Duvidas</a>
-                                </li>
-                                <li class="nav-item" onclick="renderLogin();">
-                                    <a class="nav-link">login</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                `)
+                localStorage.removeItem("token");
+                renderNavNaoAutenticado();
+                renderInicio();
                 return null
             }
         })
@@ -61,32 +36,8 @@ async function renderContent1(){
             switch (res.tipoConta) {
                 case 'admin':
                     
-                    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
-                    <div class="container-fluid">
-                        <div class="ml-5"  onclick='location.reload();'>
-                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
-                        </div>
-                        
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
-                            <ul class="navbar-nav" style="cursor: pointer;">
-                                <li class="nav-item" onclick="location.reload();">
-                                    <a class="nav-link">Inicio</a>
-                                </li>
-                                <li class="nav-item" onclick="renderGerirRecursos();">
-                                    <a class="nav-link">Gerir Recursos</a>
-                                </li>
-                                <li class="nav-item" onclick="logout();">
-                                    <a class="nav-link">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-                `)
+                    renderNavAdmin();
+                    renderEstatisticas()
                     break;
                  case 'diretor de turma':
                     renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
@@ -117,70 +68,12 @@ async function renderContent1(){
                 `)
                     break;
                 case 'formando':
-                    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
-                    <div class="container-fluid">
-                        <div class="ml-5"  onclick='location.reload();'>
-                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
-                        </div>
-                        
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
-                            <ul class="navbar-nav" style="cursor: pointer;">
-                                <li class="nav-item" onclick="location.reload();;">
-                                    <a class="nav-link">Inicio</a>
-                                </li>
-                                <li class="nav-item" onclick="renderOfertas();">
-                                    <a class="nav-link">Ofertas</a>
-                                </li>
-                                <li class="nav-item" onclick="renderDuvidas();">
-                                    <a class="nav-link" >Duvidas</a>
-                                </li>
-                                <li class="nav-item" onclick="renderPerfilEmpresa();">
-                                    <a class="nav-link" >Perfil</a>
-                                </li>
-                                <li class="nav-item" onclick="logout();">
-                                    <a class="nav-link">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>`)
+                    renderNavFormando();
+                    renderOfertas();
                     break;
                 case 'empresa':
-                    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
-                    <div class="container-fluid">
-                        <div class="ml-5"  onclick='location.reload();'>
-                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
-                        </div>
-                        
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        
-                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
-                            <ul class="navbar-nav" style="cursor: pointer;">
-                                <li class="nav-item" onclick="location.reload();;">
-                                    <a class="nav-link">Inicio</a>
-                                </li>
-                                <li class="nav-item" onclick="renderMinhaArea();">
-                                    <a class="nav-link">Minha Área</a>
-                                </li>
-                                <li class="nav-item" onclick="renderDuvidas();">
-                                    <a class="nav-link" >Duvidas</a>
-                                </li>
-                                <li class="nav-item" onclick="renderPerfilEmpresa();">
-                                    <a class="nav-link" >Perfil</a>
-                                </li>
-                                <li class="nav-item" onclick="logout();">
-                                    <a class="nav-link">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>`)
+                    renderNavEmpresa();
+                    renderMinhaArea();
                     break;
                 
             }
@@ -189,9 +82,19 @@ async function renderContent1(){
         .catch((error) => console.log(error));
 
     }else{
-        renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
+        renderNavNaoAutenticado();
+        renderInicio();
+    }
+}
+
+
+/****   Não autenticado   ****/
+
+//renders
+function renderNavNaoAutenticado(){
+    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
         <div class="container-fluid">
-            <div class="ml-5"  onclick='location.reload();'>
+            <div class="ml-5"  onclick='renderInicio();'>
                 <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
             </div>
             
@@ -201,7 +104,7 @@ async function renderContent1(){
             
             <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
                 <ul class="navbar-nav" style="cursor: pointer;">
-                    <li class="nav-item" onclick="location.reload();;">
+                    <li class="nav-item" onclick="renderInicio();">
                         <a class="nav-link">Inicio</a>
                     </li>
                     <li class="nav-item" onclick="renderDuvidas();">
@@ -215,12 +118,170 @@ async function renderContent1(){
         </div>
     </nav>
     `)
-    }
-
 }
+function renderInicio(){
+    renderCode("content",
+    `<div class="top">
+    <div class="banner1">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 mt-5">
+                    <strong><h1>Plataforma de estágios</h1></strong>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur 
+                    quos vitae eveniet ex officia repellat molestiae possimus ut perferendis voluptate voluptatum quasi ducimus, 
+                    libero rem esse impedit nesciunt mollitia aliquam.</p>
+                </div>
 
+                <div class="col-sm-6">
+                    <img class="ban-img img-fluid" src="http://localhost:3000/files/Assets/work.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#fff" fill-opacity="1" d="M0,128L120,138.7C240,149,480,171,720,165.3C960,160,1200,128,1320,112L1440,96L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path></svg>
+    </div>
 
-//nao autenticado
+    <div class="container mt-5 mb-5">
+    <div class="estagios">
+        <div class="row d-flex align-items-center">
+            <div class="col-sm-6">
+                <img class="img-fluid" src="http://localhost:3000/files/Assets/Estagio.svg" alt="" >
+            </div>
+
+            <div class="estagio col-sm-6">
+                <h1>O que é formação em contexto de traballho?</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur 
+                    quos vitae eveniet ex officia repellat molestiae possimus ut perferendis voluptate voluptatum quasi ducimus, 
+                    libero rem esse impedit nesciunt mollitia aliquam.
+                <p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+    <h5>Como começar?</h5>
+    </div>
+
+    <!-- cartoes -->
+    <div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-1.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/userLogin.png" alt="">
+                    </div>
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Login</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-2.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/candidate.png" alt="">
+                    </div>
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Encontrar Estagio</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-3.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/serAceito.png" alt="">
+                    </div>    
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Ser aceite</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-1verde.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/empresa.png" alt="">
+                    </div>
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Criar Conta</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-2verde.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/pasta.png" alt="">
+                    </div>
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Criar Anuncio</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="card text-center shadow-lg hover-translate-y-n10">
+                <div class="px-4 py-2">
+                    <div class="position-relative">
+                        <div class="position-absolute top-0 start-0">
+                            <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-3verde.png" alt="">
+                        </div>
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/check.png" alt="">
+                    </div>
+                </div>
+
+                <div class="px-4 py-1">
+                    <h5>Aceitar Estagiarios</h5>
+                    <p>Lorem ipsum, libero delectus vero, itaque earum?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container mt-5">
+    </div>
+    `);
+}
 function renderDuvidas(){
     renderCode("content",
 `<div class="container text-center">
@@ -268,8 +329,118 @@ function renderDuvidas(){
             <img class="img-fluid" src="http://localhost:3000/files/Assets/duvidas.svg" alt="">
         </div>
     </div>
-</div>`);
+    </div>
+    `);
 }
+function renderLogin(){
+    renderCode("content",
+`<div id="formulario" class="container mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+            <div class="container">
+                <center><img width="300px" height="auto" src="http://localhost:3000/files/Assets/logoPlataforma.png" class="img-fluid" alt=""></center>
+                <center><p class="mt-3">Se não possui conta faça o seu <a onclick='renderRegisto();' class="text-primary" style="cursor: pointer;"><strong>registo</strong></a></p></center>
+            </div>
+            
+            <div class="container">
+                <form class="needs-validation" novalidate>
+                    <center><div class="row" style="max-width: 460px; text-align: start;">
+                        <div class="col-sm-12 mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="email" name="email" style="border-radius: 20px;" required>
+                        </div>
+                        <div class="col-sm-12 mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Password" style="border-radius: 20px;" required>
+                        </div>
+                        <center><button style="border-radius: 20px; width: 150px; height: auto;" type="button" class="btn btn-primary" onclick='login();'>Login</button></center>
+                    </div></center>
+                </form>
+            </div>
+        </div>
+        `);
+}
+
+function renderRegisto(){
+    renderCode("content",`
+    <div class="container mt-5">
+    <div class="shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="info">
+            <center><div class="mt-1">
+                <h1>Registo</h1>
+                <p>Se ja possui conta faça <a onclick='renderLogin();' class="text-primary" style="cursor: pointer;"><strong>login</strong></a></p>
+            </div></center>
+        </div>
+        <div class="row">
+            <div class="imgCriarAnuncio col-sm-6 mt-3">
+                <img class="img-fluid" src="http://localhost:3000/files/Assets/criarEmpre.svg" alt="criar conta">
+            </div>
+
+            <div class="formulario col-sm-6 mt-5">
+                <form id="registoEmpresario" class="needs-validation" novalidate>
+                    <div class="row">
+
+                        <div class="col-sm-12 mt-1">
+                            <div class="mt-1">
+                                <label for="emailadd" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" maxlength="255" required>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 mt-1">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" maxlength="500" pattern=".{9,}" required>
+                            <!--<div class="invalid-feedback"><p>no minimo 8 caracters</p></div>-->
+                        </div>
+
+                        <div class="col-sm-12 mt-1">
+                            <label for="nomeempresa" class="form-label">Nome da empresa</label>
+                            <input type="text" class="form-control" id="nome" maxlength="50" required>
+                        </div>
+
+
+                        <div class="col-sm-12 mt-1">
+                            <label for="contactoTelefonico" class="form-label">Contacto telefónico</label>
+                            <input type="tel" class="form-control" id="contactoTelefonico" placeholder="+351" pattern=".{9,}" onKeyPress="if(this.value.length==9) return false;" placeholder="+351" onchange="validaContactoTelefonico()" required>
+                        </div>
+                        
+                        <div class="form-check col-sm-12 mt-3" style="margin-left: 12px;">
+                            <input class="form-check-input" type="checkbox" id="termosUso" required>
+                            <label class="form-check-label" for="termosUso">Aceitar</label>
+                            <a onclick='openModal("termos");' class="text-primary" style="cursor: pointer;"><strong>Termos de uso</strong></a>
+                            
+                            <!-- <Modal> -->
+                            <div class="modal fade" id="termos">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Termos de uso da utilização do sistema</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    Termos do sistema
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- </Modal> -->
+
+                        </div>
+
+                        <div class="col-sm-12 justify-content-center mt-4">
+                            <center><button type="button" class="col-sm-6 btn btn-primary" style="border-radius: 30px;" onclick='registar();'>Criar conta</button></center>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+`);
+}
+
+//funçoes
 async function login(){
     const options = {
         method: 'POST',
@@ -297,15 +468,494 @@ async function login(){
       
 }
 
-//todos
-function logout(){
-    localStorage.removeItem("token");
+async function registar(){
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify({
+            tipoConta:"empresa",
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+            nome: document.getElementById("nome").value,
+            contactoTelefonico: document.getElementById("contactoTelefonico").value,
+        })
+    }
+
+    await fetch('http://localhost:3000/api/users', options)
+    .then(res => res.text())
+    .then(text =>{
+        alert(text)
+    })
+    .catch((err) =>{
+        alert("Ocorreu um erro na efetuação do seu registo");
+        alert(err);
+    })
     location.reload()
 }
 
-//admin
 
-//empresa
+/****   Admin   ****/
+
+//renders
+function renderNavAdmin(){
+    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
+                    <div class="container-fluid">
+                        <div class="ml-5"  onclick='renderEstatisticas()'>
+                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
+                        </div>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
+                            <ul class="navbar-nav" style="cursor: pointer;">
+                                <li class="nav-item" onclick="renderEstatisticas()">
+                                <a class="nav-link">Estatisticas</a>
+                                </li>
+                                <li class="nav-item" onclick="renderGerirRecursos();">
+                                    <a class="nav-link">Gestão</a>
+                                </li>
+                                
+                                <li class="nav-item" onclick="logout();">
+                                    <a class="nav-link">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                `)
+}
+
+function renderGerirRecursos(){
+    renderCode("content",
+`<div class="container mt-3 mb-4">
+<div class="row">
+  <h2>Gerir recursos</h2>
+  <div class="col-sm-2">
+    <select id="estado" class="form-select col-sm-6 mx-1 " onchange="selecionar();" aria-label="Default select example">
+      <option selected value="alunos">Alunos</option>
+      <option value="empresa">Empresas</option>
+      <option value="adminsDiretores">Administradores</option>
+    </select>
+  </div>
+</div>
+</div>
+
+<div class="container">
+<div id="painelGestao">
+<div class="mt-4">
+<div id="criacaoCurso"></div>
+
+<div class="container mb-4 shadow-lg p-3 bg-body rounded" onmouseover="mostrarBotao('btnCriarCurso','criacaoCurso')" onmouseout="esconderBotao('btnCriarCurso')">
+<div class="criar d-flex">
+    <div><h3>Cursos</h3></div>
+    <div id="btnCriarCurso" style="display: none;"><button type="button" class="btn btn-primary mx-3" style="border-radius: 30px;" onclick="abrirCriarCurso();">Abrir formulário</button></div>
+</div>
+    
+<div class="table-responsive-sm">
+    <table class="table text-center">
+        <thead>
+        <tr>
+        <th class="col-sm-4" scope="col">Nome</th>
+        <th class="col-sm-4" scope="col">Sigla</th>
+        <th class="col-sm-4" scope="col">Área</th>    
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Tecnico de informatica - Sistemas</td>
+            <td>TIS</td>
+            <td>informatica</td>    
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center"><label class="text-danger" id="msgCursos"></label></div>
+</div>
+</div>
+
+<div id="criacaoTurma"></div>
+
+<div class="container mb-4  shadow-lg p-3 bg-body rounded" onmouseover="mostrarBotao('btnCriarTurma','criacaoTurma')" onmouseout="esconderBotao('btnCriarTurma')">
+    <div class="criar d-flex align-items-center">
+    <h3>Turmas</h3>
+    <div id="btnCriarTurma" style="display: none;"><button type="button" class="btn btn-primary mx-3" style="border-radius: 30px;" onclick="abrirCriarTurma();">Abrir formulário</button></div>
+    
+    </div>
+    <div class="table-responsive-sm">
+    <table class="table text-center">
+        <thead >
+        <tr>
+        <th scope="col"><input class="form-check-input" type="radio" id="radioTodas" value=0 checked></th>
+        <th scope="col">Nome</th>
+        <th scope="col">Curso </th>
+        <th scope="col">Alunos</th>
+        <th scope="col">Alunos com estágio confirmado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+    
+            <td scope="col" style="width: 5%;"><input class="form-check-input" type="radio" value=1></td>
+            <td>TIS 2º ano turma 1</td>
+            <td>Tecnico de informatica - Sistemas</td>
+            <td>10</td>    
+            <td>9</td>    
+        </tr>
+
+        
+        </tbody>
+    </table>
+    <div class="text-center"><label class="text-danger" id="msgTurmas"></label></div>
+    </div>
+</div>
+
+<div id="criacaoAluno"></div>
+
+<div class="container shadow-lg p-3 mb-5 bg-body rounded" onmouseover="mostrarBotao('btnCriarAluno','criacaoAluno')" onmouseout="esconderBotao('btnCriarAluno')">
+    <div class="criar d-flex align-items-center">
+    <h3>Alunos</h3>
+    <div id="btnCriarAluno" style="display: none;"> <button type="button" class="btn btn-primary mx-3" style="border-radius: 30px;" onclick="abrirCriarAluno();">Abrir formulário</button></div>
+    </div>
+
+    <div class="table-responsive-sm">
+    <table class="table text-center">
+        <thead >
+        <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Turma</th>
+        <th scope="col">Estado</th> 
+        </tr>
+        </thead>
+        <tbody>
+        <tr><td>João Pinto</td>
+            <td>example@gmail.com</td>
+            <td>TIS 2º ano turma 1</td>
+            <td>Confirmado</th></td>
+        </tr>  
+        </tbody>
+    </table>
+    <div class="text-center"><label class="text-danger" id="msgAlunos"></label></div>
+    </div>
+</div>
+</div>
+
+</div>
+</div>`);
+}
+
+function renderEstatisticas(){
+    renderCode("content",
+`Pagina de estatisticas`);
+}
+//funçoes
+
+
+/****   Formando   ****/
+
+//renders
+function renderNavFormando(){
+    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
+                    <div class="container-fluid">
+                        <div class="ml-5"  onclick='renderOfertas();'>
+                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
+                        </div>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
+                            <ul class="navbar-nav" style="cursor: pointer;">
+                                <li class="nav-item" onclick="renderOfertas();">
+                                    <a class="nav-link">Ofertas</a>
+                                </li>
+                                <li class="nav-item" onclick="renderDuvidas();">
+                                    <a class="nav-link" >Duvidas</a>
+                                </li>
+                                <li class="nav-item" onclick="renderPerfilFormando();">
+                                    <a class="nav-link" >Perfil</a>
+                                </li>
+                                <li class="nav-item" onclick="logout();">
+                                    <a class="nav-link">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>`)
+}
+function renderOfertas(){
+    renderCode('content',`<div class="container mt-5" style="background-color: #3898ec;">
+    <div class="collapse navbar-collapse">
+        
+    </div>
+</div>
+
+<div class="container mt-5">
+    <nav class="col-lg-6" style="background-color: #3898ec;">
+        <div class="container-fluid d-sm-flex col-sm-12 mb-5">
+            <div class="col-sm-12 d-sm-flex mx-auto">
+                    <div class="w-100 w-sm-75 mx-auto d-sm-flex">
+                    
+                        <p class="mx-2"><strong>Ilha</strong></p>
+                        <select class="form-select" aria-label="Default select example" id="ilha" onchange="getConcelhos();">
+                        <option value="0">Todas</option>
+                        </select>
+                    </div>
+
+                    
+                    <div class="w-100 w-sm-75 mx-auto d-sm-flex">
+                        <p class="mx-2"><strong>Concelho</strong></p>
+                        <select class="form-select" aria-label="Default select example" id="concelho" onchange="getAnunciosConcelho();" disabled>
+                        </select>
+                    </div>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="mt-5">
+        <h2>Anuncios existentes</h2>
+    </div>
+
+    <div class="card mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="row">
+            <div class="logo col-sm-3">
+                <div class="img">
+                    <center><button type="button" class="btn btn-sm btn-outline-primary mt-2 mb-2">Manifestar interese</button></center>
+                    <img src="http://localhost:3000/files/Assets/MUSAMI.jpg" class="img-fluid" alt="logo" style="width: 225px; height: 225px;">
+                </div>
+            </div>
+
+            <div class="col-sm-4 mt-5">
+                <div class="col">
+                    <h5>MUSAMI</h5>
+                </div>
+
+                <div class="col mt-4">
+                    <h5>Area</h5>
+                    <p>Técnico de informática - Sistemas</p>
+                </div>
+
+                <div class="col mt-5">
+                    <h5>Localização</h5>
+                    <p>São pedro, Ponta Delgada, São Miguel</p>
+                </div>
+            </div>
+
+            <div class="col-sm-5 mt-5">
+                <div class="col">
+                    <h5 class="card-title">Descrição do trabalho</h5>
+                    <p class="card-text">Gestão de redes e equipamento informático da empresa</p> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mt-5 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="row">
+            <div class="logo col-sm-3">
+                <div class="img">
+                    <center><button type="button" class="btn btn-sm btn-outline-primary mt-2 mb-2">Manifestar interese</button></center>
+                    <img src="http://localhost:3000/files/Assets/MUSAMI.jpg" class="img-fluid" alt="logo" style="width: 225px; height: 225px;">
+                </div>
+            </div>
+
+            <div class="col-sm-4 mt-5">
+                <div class="col">
+                    <h5>MUSAMI</h5>
+                </div>
+
+                <div class="col mt-4">
+                    <h5>Area</h5>
+                    <p>Técnico de informática - Sistemas</p>
+                </div>
+
+                <div class="col mt-5">
+                    <h5>Localização</h5>
+                    <p>São pedro, Ponta Delgada, São Miguel</p>
+                </div>
+            </div>
+
+            <div class="col-sm-4 mt-5">
+                <div class="col">
+                    <h5 class="card-title">Descrição do trabalho</h5>
+                    <p class="card-text">Gestão de redes e equipamento informático da empresa</p> 
+                </div>
+            </div>
+
+            <div class="col-sm-1">
+                <div class="col">
+                    <div class="row mx-auto">
+                        <button type="button" class="btn btn-primary mt-5"><i class="fas fa-user-alt"></i></button> <button type="button" class="btn btn-success mt-3"><i class="fas fa-check"></i></button> <button type="button" class="btn btn-danger mt-3"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <h2>Inscrições pendentes</h2>
+    </div>
+
+    <div class="card mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="row">
+            <div class="logo col-sm-3">
+                <div class="img">
+                    <center><button type="button" class="btn btn-sm btn-outline-danger mb-2">Cancelar interese</button></center>
+                    <img src="http://localhost:3000/files/Assets/MUSAMI.jpg" class="img-fluid" alt="logo" style="width: 225px; height: 225px;">
+                </div>
+            </div>
+
+            <div class="col-sm-4 mt-5">
+                <div class="col">
+                    <h5>MUSAMI</h5>
+                </div>
+
+                <div class="col">
+                    <h5>Area</h5>
+                    <p>Técnico de informática - Sistemas</p>
+                </div>
+            </div>
+
+            <div class="col-sm-5 mt-5">
+                <div class="col">
+                    <h5>Localização</h5>
+                    <p>São pedro, Ponta Delgada, São Miguel</p>                            
+                </div>
+
+                <div class="col">
+                    <h5 class="card-title">Descrição do trabalho</h5>
+                    <p class="card-text">Gestão de redes e equipamento informático da empresa</p>                           
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h2>Anuncios confirmados</h2>
+    <div class="card mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="row">
+            <div class="logo col-sm-3">
+                <div class="img">
+                    <center><button type="button" class="btn btn-sm btn-outline-success mb-2">Confirmar estagio</button></center>
+                    <img src="http://localhost:3000/files/Assets/MUSAMI.jpg" class="img-fluid" alt="logo" style="width: 225px; height: 225px;">
+                </div>
+            </div>
+
+            <div class="conteudo col-sm-9 mt-4">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h5>Curso</h5>
+                        <p>Técnico de informática - Sistemas</p>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <h5>Área de integração</h5>
+                        <p>Gestão de redes</p>                            
+                    </div>
+
+                    <div class="col-sm-6 mt-5">
+                        <h5 class="card-title">Descrição do trabalho</h5>
+                        <p class="card-text">Gestão de redes e equipamento informático da empresa</p>                           
+                    </div>
+
+                    <div class="col-sm-6 mt-5">
+                        <h5>Localização</h5>
+                        <p>São pedro, Ponta Delgada, São Miguel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>`)
+}
+function renderPerfilFormando(){
+    renderCode("content",
+`<div class="container mt-2">
+<div id="imgPerfil" class="shadow-lg p-1 mt-2 mx-auto d-block border">
+    <img src="http://localhost:3000/files/Assets/profile.svg" class="img-thumbnail rounded rounded-circle mx-auto d-block border border-light" alt="..." style="height: 250px;">
+    <button class="btn btn-primary" type="button"><i class="fas fa-camera"></i></button>
+    <input type="file" class="form-control" id="fotoPerfil" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+</div>
+
+<div class="mt-3 shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="row">
+        <div class="conteudo col-sm-12 mt-4">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h5>Nome</h5>
+                    <p>Diogo Branco</p>
+                </div>
+
+                <div class="col-sm-4">
+                    <h5>Curso</h5>
+                    <p>Tecnico de informatica - Sistemas</p>                            
+                </div>
+
+                <div class="col-sm-4">
+                    <h5>Turma</h5>
+                    <p>T1</p>                            
+                </div>
+
+                <div class="col-sm-4">
+                    <h5>Data de nascimento</h5>
+                    <p>10/12/2002</p>                            
+                </div>
+
+                <div class="col-sm-4">
+                    <h5>Morada</h5>
+                    <p>São pedro, Ponta Delgada, São Miguel</p>
+                </div>
+
+                <div class="col-sm-4">
+                    <h5>Currícolo</h5>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-user-alt"></i></button>                         
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>`);}
+
+
+/****   Empresa   ****/
+
+//renders
+function renderNavEmpresa(){
+    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
+                    <div class="container-fluid">
+                        <div class="ml-5"  onclick='renderMinhaArea()'>
+                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
+                        </div>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
+                            <ul class="navbar-nav" style="cursor: pointer;">
+                                <li class="nav-item" onclick="renderMinhaArea();">
+                                    <a class="nav-link">Minha Área</a>
+                                </li>
+                                <li class="nav-item" onclick="renderDuvidas();">
+                                    <a class="nav-link" >Duvidas</a>
+                                </li>
+                                <li class="nav-item" onclick="renderPerfilEmpresa();">
+                                    <a class="nav-link" >Perfil</a>
+                                </li>
+                                <li class="nav-item" onclick="logout();">
+                                    <a class="nav-link">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>`)
+}
 function renderPerfilEmpresa(){
     renderCode("content",
 `<div class="container mt-2">
@@ -334,12 +984,14 @@ function renderPerfilEmpresa(){
         </div>
     </div>
 </div>
-</div>`);}
+</div>
+`);
+}
 function renderMinhaArea(){
     renderCode("content",
 `<div class="container mt-5 d-flex">
 <h2>Ofertas Ativas</h2>
-<button type="button" class="btn btn-primary mx-3 rounded" onclick='openModal("criacaoOferta");' >Criar Oferta</button>
+<button type="button" class="btn btn-primary mx-3 rounded" onclick='fillAreas(); openModal("criacaoOferta");' >Criar Oferta</button>
 </div>
 
 <div class="container">
@@ -450,10 +1102,7 @@ function renderMinhaArea(){
                             <div class="col-sm-12 mt-2">
                                 <label for="area" class="form-label">Area</label>
                                 <select class="form-select" aria-label="Default select example" id="area" required>
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="0" selected></option>
                                 </select>
                             </div>
 
@@ -503,9 +1152,31 @@ function renderMinhaArea(){
         </div>
     </div>
 </div>
-</div>`);}
+</div>
+`);
+}
+//funçoes
+async function fillAreas(){
+    console.log("sheta")
+    await fetch('http://localhost:3000/api/unrestricted/areas')
+    .then(res => res.json())
+    .then(data => {
+        for(let i = 0; i< data.length; i++){
+            document.getElementById("area").innerHTML+= `<option value="${data[i].idArea}">${data[i].nome}</option>`
+    }})
+    .catch((err)=>{
+        console.log(err)
+        alert('Erro na recolha das ilhas')
+    })
+}
 
 
+
+//todos
+function logout(){
+    localStorage.removeItem("token");
+    location.reload()
+}
 
 //metodos auxiliares
 function openModal(id) {
