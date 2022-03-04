@@ -1123,6 +1123,49 @@ function fillTabelaFormandos(idTurma){
     })
 }
 
+
+/****   Formando   ****/
+
+//renders
+function renderNavDiretorTurma(){
+    renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
+                    <div class="container-fluid">
+                        <div class="ml-5"  onclick='renderOfertas();'>
+                            <img class="d-inline-block align-text-top" src="http://localhost:3000/files/Assets/logoPlataformaPrincipal.png" alt="img-fluid" height="60px" width="auto" style="cursor: pointer;">
+                        </div>
+                        
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        
+                        <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
+                            <ul class="navbar-nav" style="cursor: pointer;">
+                                <li class="nav-item" onclick="renderAprovacoesEstagio();">
+                                    <a class="nav-link">Aprovações de estágio</a>
+                                </li>
+                                <li class="nav-item" onclick="renderGerirTurmas();">
+                                    <a class="nav-link" >Gerir Turmas</a>
+                                </li>
+                                <li class="nav-item" onclick="renderGerirTurmas();">
+                                    <a class="nav-link" >Perfil</a>
+                                </li>
+                                <li class="nav-item" onclick="logout();">
+                                    <a class="nav-link">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>`)
+}
+function renderAprovacoesEstagio(){
+    renderCode('content',``)
+}
+function renderGerirTurmas(){
+    renderCode("content",``);
+}
+//funções
+
+
 /****   Formando   ****/
 
 //renders
