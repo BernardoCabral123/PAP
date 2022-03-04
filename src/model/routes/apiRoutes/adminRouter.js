@@ -4,8 +4,8 @@ const router = express.Router();
 
 const dbConnection = require("../../dbConnection");
 
-router.get(`/`,(req,res)=>{
-    dbConnection.query("SELECT * FROM vistaAdministrador;",(err,result)=>{
+router.get(`/cursos`,(req,res)=>{
+    dbConnection.query("SELECT * FROM vistaCurso ORDER BY idCurso;",(err,result)=>{
         if(err){
             console.log("falha na execucao do query")
         }
@@ -15,22 +15,37 @@ router.get(`/`,(req,res)=>{
     })
 });
 
- router.post(`/`,(req,res)=>{
-    
-    for(let i = 0;i <req.body.length; i++){
-        let password = Math.random().toString(36).substring(2, 15);
+router.get(`/turmas`,(req,res)=>{
+    dbConnection.query("SELECT * FROM vistaTurma ORDER BY idCurso,turma;",(err,result)=>{
+        if(err){
+            console.log("falha na execucao do query")
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
 
-            dbConnection.query(`CALL criarAdmin('${req.body[i].email}','${password}')`,(err,result)=>{
-            if(err){
-                console.log(err);
-            }
-            else{
-            }
-        });
-    }
-    
-    res.send(req.body.length + ` Admins adicionados `)
-    
-})
+router.get(`/formandos`,(req,res)=>{
+    dbConnection.query("SELECT * FROM vistaFormando ORDER BY idCurso,turma;",(err,result)=>{
+        if(err){
+            console.log("falha na execucao do query")
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
+
+router.get(`/formandos/:idTurma`,(req,res)=>{
+    dbConnection.query("SELECT * FROM vistaFormando WHERE idTurma = ?;",[req.params.idTurma],(err,result)=>{
+        if(err){
+            console.log("falha na execucao do query")
+        }
+        else{
+            res.json(result);
+        }
+    })
+});
 
 module.exports = router;

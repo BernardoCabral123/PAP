@@ -102,27 +102,34 @@ exports.checkAuth = (req, res, callback) => {
 exports.checkAuthAdmin = (req, res, callback) => {
 
     if(!req.headers.authorization) res.status(406).json({msg:"Não autorizado"})
-    try {
-        connection.query(
-            'SELECT * FROM conta WHERE publicKey = ?',
-            [jwt.decode(req.headers.authorization).pk],
-            (error,result) => {
-                if (error) throw error;
-                if(!result) res.status(401).json({msg:'Utlizador não encontrado'});
-
-                jwt.verify(req.headers.authorization,result[0].privateKey, (error)=>{
-                    if(error) res.status(401).json('Token inválido');
-                        if(result[0].tipoConta == 'admin'){
-                            req.user = result[0];
-                            return callback();
+    else{
+        try {
+            connection.query(
+                'SELECT * FROM conta WHERE publicKey = ?',
+                [jwt.decode(req.headers.authorization).pk],
+                (error,result) => {
+                    if (error) throw error;
+                    if(!result) res.status(401).json({msg:'Utlizador não encontrado'});
+    
+                    else{
+                    jwt.verify(req.headers.authorization,result[0].privateKey, (error)=>{
+                        if(error) res.status(401).json('Token inválido');
+                        else{
+                            if(result[0].tipoConta == 'admin'){
+                                req.user = result[0];
+                                return callback();
+                            }else{
+                                res.status(406).json({msg:"Não autorizado"})
+                            }
                         }
-                        res.status(406).json({msg:"Não autorizado"})
-                })
-            }
-        )
-    }
-    catch(error){
-        res.json({msg:'Ocorreu um erro'})
+    
+                    })
+                }
+            })
+        }
+        catch(error){
+            res.json({msg:'Ocorreu um erro'})
+        }
     }
 }
 
