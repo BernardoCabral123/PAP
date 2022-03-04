@@ -34,7 +34,7 @@ async function renderContent1(){
                 case 'admin':
                     
                     renderNavAdmin();
-                    renderEstatisticas()
+                    renderGerirRecursos()
                     break;
                  case 'diretor de turma':
                     renderCode("navbar",`<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #3898ec;">
@@ -506,11 +506,8 @@ function renderNavAdmin(){
                         
                         <div class="collapse navbar-collapse" style="justify-content: end !important;" id="navbarNav">
                             <ul class="navbar-nav" style="cursor: pointer;">
-                                <li class="nav-item" onclick="renderEstatisticas()">
-                                <a class="nav-link">Estatisticas</a>
-                                </li>
                                 <li class="nav-item" onclick="renderGerirRecursos();">
-                                    <a class="nav-link">Gestão</a>
+                                    <a class="nav-link">Gestão de recursos</a>
                                 </li>
                                 
                                 <li class="nav-item" onclick="logout();">
@@ -542,10 +539,6 @@ function renderGerirRecursos(){
 
     </div>
 </div>`);
-}
-function renderEstatisticas(){
-    renderCode("content",
-`Pagina de estatisticas`);
 }
 //funçoes
 function selecionar(){
@@ -1016,7 +1009,6 @@ function selecionar(){
         break;
     } 
 }
-
 function fillTabelaCursos(){
     const options = {
         method: 'GET',
@@ -1053,7 +1045,6 @@ function fillTabelaCursos(){
         alert('Erro na recolha dos cursos')
     })
 }
-
 function fillTabelaTurmas(){
     const options = {
         method: 'GET',
@@ -1096,7 +1087,6 @@ function fillTabelaTurmas(){
         alert('Erro na recolha das turmas')
     })
 }
-
 function fillTabelaFormandos(idTurma){
     document.getElementById("tblFormandos").innerHTML = ``;
     const options = {
@@ -1108,7 +1098,6 @@ function fillTabelaFormandos(idTurma){
     fetch(`http://localhost:3000/api/admin/formandos/${idTurma}`,options)
     .then((res) =>{
         if(res.status=200) return res.json()
-        console.log("sheta")
         return null
     })
     .then((data) => {
@@ -1402,6 +1391,7 @@ function renderPerfilFormando(){
 </div>
 </div>`);
 }
+//funções
 
 
 /****   Empresa   ****/
@@ -1646,30 +1636,28 @@ async function fillAreas(){
 }
 
 
+/****   Todos   ****/
 
-//todos
+//funções
 function logout(){
     localStorage.removeItem("token");
     location.reload()
 }
 
-//metodos auxiliares
+
+
+
+/****   Metodos Auxiliares   ****/
 function openModal(id) {
     var myModal = new bootstrap.Modal(document.getElementById(id), {  keyboard: false });
     myModal.show();
 }
-
-
-
 function mostrarBotao(x){
     document.getElementById(x).style.display = 'block';
-
 }
-
 function esconderBotao(x){
     document.getElementById(x).style.display = "none";
 }
-
 function abrirCriarAdm(){
     document.getElementById("criacaoDTS").innerHTML = "";
     document.getElementById("criacaoAdm").innerHTML = `
@@ -1719,7 +1707,6 @@ function abrirCriarAdm(){
 
     document.getElementById('criacaoAdm').scrollIntoView();
 }
-
 function abrirCriarDTS(){
     document.getElementById('criacaoAdm').innerHTML = "";
     document.getElementById("criacaoDTS").innerHTML = `
