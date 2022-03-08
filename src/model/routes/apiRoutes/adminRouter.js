@@ -15,6 +15,19 @@ router.get(`/cursos`,(req,res)=>{
     })
 });
 
+router.put(`/cursos`,(req,res)=>{
+    dbConnection.query("UPDATE pap-plataformaestagios.curso` SET idArea = ?, nome = ?, sigla ?, `duracao` = ? WHERE idCurso` = ?",
+            [req.body.idArea, req.body.nome, req.body.sigla. req.body.duracao, req.body.idCurso],
+            (err,result)=>{
+                if(err){
+                    console.log(err);
+                    res.status(422).send("Erro na introdução");
+                }
+                else{                        
+                    res.status(200).send("Conta criada com sucesso")
+                    };
+})});
+
 router.get(`/turmas`,(req,res)=>{
     dbConnection.query("SELECT * FROM vistaTurma ORDER BY idCurso,turma;",(err,result)=>{
         if(err){

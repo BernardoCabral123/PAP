@@ -4,8 +4,8 @@ const express = require("express");
 const router = express.Router();
 
 
-router.get("/select.js",(req,res)=>{
-    res.sendFile(path.join(srcLocation,"/controller/select.js"));
+router.get("/indexPageController.js",(req,res)=>{
+    res.sendFile(path.join(srcLocation,"/controller/indexPageController.js"));
 })
 
 
