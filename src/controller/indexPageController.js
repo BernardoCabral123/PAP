@@ -33,6 +33,7 @@ async function renderPage(){
                 case 'admin':
                     renderNavAdmin();
                     renderGerirRecursos()
+                    selecionar()
                     break;
                  case 'diretor de turma':
                     renderNavDiretorTurma();
@@ -585,7 +586,7 @@ function selecionar(){
                     <table class="table text-center">
                         <thead >
                         <tr>
-                        <th scope="col">Nomee</th>
+                        <th scope="col">Nome</th>
                         <th scope="col">Email</th>
                         <th scope="col">Turma</th>
                         <th scope="col" style="display:none" id="acoesFormandos" >Ações</th>
@@ -606,7 +607,7 @@ function selecionar(){
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="container mb-1">
-                            <div class="criarAluno shadow-lg p-3 bg-body rounded">
+                            <div class="shadow-lg p-3 bg-body rounded">
                                 <div class="row">
                                     <div class="col-4 mx-auto">
                                         <img class="img-fluid" style="width:auto;" src="http://localhost:3000/files/Assets/curso.svg" alt="aluno">
@@ -615,8 +616,8 @@ function selecionar(){
                                         <form>
                                             <div class="row mt-4">
                                                 <div class="col-sm-6 mt-1">
-                                                    <label for="pNome" class="form-label"><strong>Nome do curso</strong></label>
-                                                    <input type="text" class="form-control" id="pNome" >
+                                                    <label for="curso" class="form-label"><strong>Nome do curso</strong></label>
+                                                    <input type="text" class="form-control" id="curso" >
                                                 </div>
                                                 <div class="col-sm-6 mt-1">
                                                     <label for="pUltimo" class="form-label"><strong>Sigla</strong></label>
@@ -673,17 +674,24 @@ function selecionar(){
                                                         </select>
                                                     </div>
                                                     <div class="col-sm-6 mt-1">
+                                                        <label for="turma" class="form-label"><strong>Diretor de turma</strong></label>
+                                                        <select id="curso" class="form-select col-sm-12" aria-label="Default select example" >
+                                                            <option value="0" selected></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6 mt-1">
                                                         <label class="form-label"><strong>Ano</strong></label>
                                                             <select id="ano" class="form-select col-sm-12" aria-label="Default select example" >
                                                                 <option value=0 selected></option>
                                                             </select>
                                                     </div>
                                                     <div class="col-sm-6 mt-1">
-                                                        <label for="turma" class="form-label"><strong>Diretor de turma</strong></label>
-                                                        <select id="curso" class="form-select col-sm-12" aria-label="Default select example" >
-                                                            <option value="0" selected></option>
+                                                        <label class="form-label"><strong>Numero</strong></label>
+                                                        <select id="ano" class="form-select col-sm-12" aria-label="Default select example" >
+                                                            <option value=0 selected></option>
                                                         </select>
                                                     </div>
+
                                                     <div class="col-sm-12 mt-4">
                                                                 <center><button type="button" class="col-sm-3 btn btn-primary  mx-1" style="border-radius: 30px;">Criar turma</button></center>
                                                     </div>
@@ -1002,12 +1010,12 @@ function fillTabelaCursos(){
             for(let i = 0; i< data.length; i++){
                 
                 str+=`
-                    <tr onmouseover="document.getElementById('botoesC${data[i].idCurso}').style.display = 'flex';" onmouseout="document.getElementById('botoesC${data[i].idCurso}').style.display = 'none';">
+                    <tr id="trC${data[i].idCurso}" onmouseover="document.getElementById('botoesC${data[i].idCurso}').style.display = 'flex';" onmouseout="document.getElementById('botoesC${data[i].idCurso}').style.display = 'none';">
                         <td id="tdCurso${data[i].idCurso}">${data[i].curso}</td>
                         <td id="tdSigla${data[i].idCurso}">${data[i].sigla}</td>
                         <td id="tdArea${data[i].idCurso}">${data[i].area}</td>
                         <td class="my-auto" style="display: none;" id="botoesC${data[i].idCurso}">
-                            <button type="button"  class="col-6 btn btn-primary mx-1"  onclick="resetModalEdicaoCurso('${data[i].idCurso}','${data[i].curso}','${data[i].sigla}','${data[i].area}','${data[i].duracao}'); openModal('edicaoCurso${data[i].idCurso}');">editar</button>
+                            <button type="button"  class="col-6 btn btn-primary mx-1"  onclick="resetModalEdicaoCurso('${data[i].idCurso}','${data[i].curso}','${data[i].sigla}','${data[i].idArea}','${data[i].area}','${data[i].duracao}'); openModal('edicaoCurso${data[i].idCurso}');">editar</button>
                             <button type="button" class="col-6 btn btn-danger mx-1"  onclick="openModal('eliminacaoCurso${data[i].idCurso}');">eliminar</button>
                         </td>
                     </tr>
@@ -1048,11 +1056,10 @@ function fillTabelaCursos(){
                     str += `<option value="1">1</option>`;
                     
                 str += `
-                                                            </select>
-                                                        </div>
+                                                            </select>                                                        </div>
                                                     </div>
                                                     <div class="col-sm-12 mt-4">
-                                                        <center><button type="button" class="col-sm-4 btn btn-primary  mx-1" style="border-radius: 30px;">Confirmar alterações</button></center>                                
+                                                        <center><button type="button" class="col-sm-4 btn btn-primary  mx-1" style="border-radius: 30px;" data-bs-dismiss="modal" onclick="editarCurso('${data[i].idCurso}',\`\${document.getElementById('curso${data[i].idCurso}').value}\`,\`\${document.getElementById('sigla${data[i].idCurso}').value}\`,\`\${document.getElementById('area${data[i].idCurso}').value}\`,\`\${document.getElementById('area${data[i].idCurso}').options[document.getElementById('area${data[i].idCurso}').selectedIndex].text}\`,\`\${document.getElementById('duracao${data[i].idCurso}').value}\`);">Confirmar alterações</button></center>                                
                                                     </div>
                                                 </form>
                                             </div>
@@ -1065,8 +1072,58 @@ function fillTabelaCursos(){
                             </div>
                         </div>
                     </div>
-                </div>`      
+                </div>` 
                 
+                str+=`<div class="modal fade" id="eliminacaoCurso${data[i].idCurso}" style="text-align: left;" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="container mb-1">
+                                <div class="criarAluno shadow-lg p-3 bg-body rounded">
+                                    <div class="row">
+                                        <div class="col-4 mx-auto">
+                                            <img class="img-fluid" style="width:auto;" src="http://localhost:3000/files/Assets/curso.svg" alt="aluno">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <form id="formEliminacaoCurso${data[i].idCurso}">
+                                                <div class="row mt-4">
+                                                    <div class="col-sm-6 mt-1">
+                                                        <label for="curso${data[i].idCurso}" class="form-label"><strong>Nome do curso</strong></label>
+                                                        <input type="text" class="form-control" id="curso${data[i].idCurso}" value="${data[i].curso}" disabled>
+                                                    </div>
+                                                    <div class="col-sm-6 mt-1">
+                                                        <label for="sigla${data[i].idCurso}" class="form-label"><strong>Sigla</strong></label>
+                                                        <input type="text" class="form-control" id="sigla${data[i].idCurso}" value="${data[i].sigla}" disabled>
+                                                    </div>
+                                                    <div class="col-sm-6 mt-1">
+                                                        <label for="area${data[i].idCurso}" class="form-label"><strong>Area</strong></label>
+                                                        <select id="area${data[i].idCurso}" class="form-select col-sm-12" disabled>
+                                                            <option selected>${data[i].area}</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6 mt-1">
+                                                        <label for="duracao${data[i].idCurso}" class="form-label"><strong>Duração</strong></label>
+                                                        <select id="duracao${data[i].idCurso}" class="form-select col-sm-12" disabled>
+                                                            <option selected>${data[i].duracao}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12 mt-4">
+                                                    <center><button type="button" class="col-sm-4 btn btn-danger  mx-1" style="border-radius: 30px;"  onclick="(eliminarCurso('${data[i].idCurso}'))" data-bs-dismiss="modal">Eliminar Curso</button></center>                                
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>`
+
             }
                 document.getElementById("tblCursos").innerHTML = str;
         }
@@ -1078,6 +1135,7 @@ function fillTabelaCursos(){
     })
 }
 function fillTabelaTurmas(){
+    document.getElementById("tblTurmas").innerHTML = ``;
     const options = {
         method: 'GET',
         headers: {
@@ -1090,20 +1148,25 @@ function fillTabelaTurmas(){
         return null
     })
     .then((data) => {
+        let str = '';
         if(data){
             for(let i = 0; i< data.length; i++){
-                document.getElementById("tblTurmas").innerHTML+= `
+                str+= `
                 <div>
                     <tr id="trT${data[i].idTurma}" onmouseover="document.getElementById('botoesT${data[i].idTurma}').style.display = 'flex';" onmouseout="document.getElementById('botoesT${data[i].idTurma}').style.display = 'none';">
-                        <td><input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onchange="fillTabelaFormandos(${data[i].idTurma});"></td>
-                        <td>${data[i].turma}</td>`
+                        <td><input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" onchange="fillTabelaFormandos(${data[i].idTurma});"></td>`
+
+                        if(data[i].turma)
+                            str += `<td>${data[i].turma}</td>`
+                        else
+                            str += `<td style="color:red">Sem curso atribuído</td>`
 
                         if(data[i].diretorTurma)
-                            document.getElementById(`trT${data[i].idTurma}`).innerHTML+= `<td>${data[i].diretorTurma}</td>`
+                            str += `<td>${data[i].diretorTurma}</td>`
                         else
-                        document.getElementById(`trT${data[i].idTurma}`).innerHTML+= `<td>___</td>`
+                        str +=  `<td style="color:red">Sem diretor de turma atribuído</td>`
                         
-                        document.getElementById(`trT${data[i].idTurma}`).innerHTML+= `
+                        str +=  `
                         <td class="my-auto" style="display: none;" id="botoesT${data[i].idTurma}">
                             <button type="button"  class="col-6 btn btn-primary mx-1"  onclick="openModel('edicaoTurma${data[i].idTurma}');">editar</button>
                             <button type="button" class="col-6 btn btn-danger mx-1"  onclick="openModel('eliminacaoTurma${data[i].idTurma}');">eliminar</button>
@@ -1111,6 +1174,7 @@ function fillTabelaTurmas(){
                     </tr> 
                 </div>
                 `}
+                document.getElementById("tblTurmas").innerHTML = str;
         }
         else return;
         })
@@ -1137,11 +1201,15 @@ function fillTabelaFormandos(idTurma){
             for(let i = 0; i< data.length; i++){
                 document.getElementById("tblFormandos").innerHTML += `
                 <div>
-                    <tr onmouseover="document.getElementById('botoesC${data[i].idConta}').style.display = 'flex';" onmouseout="document.getElementById('botoesC${data[i].idConta}').style.display = 'none';">
+                    <tr id="trF${data[i].idTurma}"onmouseover="document.getElementById('botoesF${data[i].idConta}').style.display = 'flex';" onmouseout="document.getElementById('botoesF${data[i].idConta}').style.display = 'none';">
                         <td>${data[i].nome}</td>
-                        <td>${data[i].email}</td>
-                        <td>${data[i].turma}</td>
-                        <td class="my-auto" style="display: none;" id="botoesC${data[i].idConta}">
+                        <td>${data[i].email}</td>`
+                        if(data[i].turma)
+                            document.getElementById(`trF${data[i].idTurma}`).innerHTML+= `<td>${data[i].turma}</td>`
+                        else
+                            document.getElementById(`trF${data[i].idTurma}`).innerHTML+= `<td style="color:red">Sem turma atribuída</td>`
+                        document.getElementById(`trF${data[i].idTurma}`).innerHTML += `
+                        <td class="my-auto" style="display: none;" id="botoesF${data[i].idConta}">
                             <button type="button" class="btn btn-danger mx-auto"  onclick="openModel('eliminacaoFormando${data[i].idConta}');">eliminar</button>
                         </td>
                     </tr> 
@@ -1154,34 +1222,37 @@ function fillTabelaFormandos(idTurma){
         alert('Erro na recolha das Formandos')
     })
 }
-function resetModalEdicaoCurso(idCurso,curso,sigla,area,duracao){
+async function resetModalEdicaoCurso(idCurso,curso,sigla,idArea,area,duracao){
     document.getElementById(`curso${idCurso}`).value = curso;
     document.getElementById(`sigla${idCurso}`).value = sigla;
     
 
     document.getElementById(`area${idCurso}`).innerHTML= ``;
-    fetch('http://localhost:3000/api/unrestricted/areas')
+    await fetch('http://localhost:3000/api/unrestricted/areas')
     .then(res => res.json())
     .then(data => {
         for(let i = 0; i< data.length; i++){
             document.getElementById(`area${idCurso}`).innerHTML+= `<option value="${data[i].idArea}">${data[i].nome}</option>`
-    }})
+        }
+        document.getElementById(`area${idCurso}`).value = idArea;
+        document.getElementById(`duracao${idCurso}`).value = duracao;
+    })
     .catch((err)=>{
         console.log(err)
         alert('Erro na recolha das areas')
     })
-    document.getElementById(`area${idCurso}`).value = area;
-    document.getElementById(`duracao${idCurso}`).value = duracao;
+
 }
-function editarCurso(idCurso,curso,sigla,idArea,area,duracao){
-    const options = {
+async function editarCurso(idCurso,curso,sigla,idArea,area,duracao){
+const options = {
         method: 'PUT',
         headers: {
-            'Content-type': 'application/json'
+            'Content-type': 'application/json',
+            Authorization :  localStorage.getItem("token")
         },
         body: JSON.stringify({
             idCurso: idCurso,
-            curso:curso,
+            nome:curso,
             sigla:sigla,
             idArea: idArea,
             duracao:duracao
@@ -1191,9 +1262,28 @@ function editarCurso(idCurso,curso,sigla,idArea,area,duracao){
     await fetch('http://localhost:3000/api/admin/cursos/', options)
     .then((res) => {
         if(res.status===200){
-            document.getElementById(`tdCurso${idCurso}`).innerHTML = curso;
-            document.getElementById(`tdSigla${idCurso}`).innerHTML = sigla;
-            document.getElementById(`tdArea${idCurso}`).innerHTML = area;
+            fillTabelaCursos();
+        }
+      })
+      .catch((error) => console.log(error));
+}
+
+function eliminarCurso(idCurso){
+    const options = {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            Authorization :  localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+            idCurso: idCurso
+        })
+    }
+    fetch('http://localhost:3000/api/admin/cursos/', options)
+    .then((res) => {
+        if(res.status===200){
+            document.getElementById(`trC${idCurso}`).remove();
+            fillTabelaTurmas();
         }
       })
       .catch((error) => console.log(error));
