@@ -1556,9 +1556,11 @@ function renderPerfilFormando(){
     renderCode("content",
 `<div class="container mt-2">
 <div id="imgPerfil" class="shadow-lg p-1 mt-2 mx-auto d-block border">
-    <img src="http://localhost:3000/files/Assets/profile.svg" class="img-thumbnail rounded rounded-circle mx-auto d-block border border-light" alt="..." style="height: 250px;">
-    <button class="btn btn-primary" type="button"><i class="fas fa-camera"></i></button>
-    <input type="file" class="form-control" id="fotoPerfil" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+<div class="position-relative">
+<img src="http://localhost:3000/files/Assets/profile.svg" class="img-thumbnail rounded rounded-circle mx-auto d-block border border-light" alt="..." style="height: 250px;">
+<button class="btn btn-primary position-absolute bottom-0 end-0" type="button"><i class="fas fa-camera"></i></button>
+</div>
+    
 </div>
 
 <div class="mt-3 shadow-lg p-3 mb-5 bg-body rounded">
@@ -1591,8 +1593,13 @@ function renderPerfilFormando(){
                 </div>
 
                 <div class="col-sm-4">
-                    <h5>Currícolo</h5>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-user-alt"></i></button>                         
+                    <h5>Currículo</h5>
+                    <button type="submit" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload" viewBox="0 0 16 16">
+                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                    </svg>
+                    </button>                         
                 </div>
             </div>
         </div>
