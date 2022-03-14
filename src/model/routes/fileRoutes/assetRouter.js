@@ -13,6 +13,10 @@ router.get("/procurar.png",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/procurar.png"));
 })
 
+router.get("/empresaV2.png",(req,res)=>{
+    res.sendFile(path.join(srcLocation,"/view/assets/empresaV2.png"));
+})
+
 router.get("/numero-1.png",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/numero-1.png"));
 })

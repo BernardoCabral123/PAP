@@ -187,7 +187,7 @@ function renderInicio(){
                         <div class="position-absolute top-0 start-0">
                             <img style="height: 50px;" class="img-fluid" src="http://localhost:3000/files/Assets/numero-1verde.png" alt="">
                         </div>
-                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/empresa.png" alt="">
+                        <img style="height: 150px;" class="img-fluid" src="http://localhost:3000/files/Assets/empresaV2.png" alt="">
                     </div>
                 </div>
 
