@@ -225,10 +225,6 @@ const dbConnection = require("../../dbConnection");
         let generatedPass = Math.random().toString(36).substring(2, 15);
         //let generatedPass = '123';
 
-        console.log(req.body.tipoConta)
-        console.log(req.body.nome)
-        console.log(req.body.email)
-
         dbConnection.query(`SELECT COUNT(conta.idConta) AS contagem FROM conta WHERE conta.email = ?`,
         [req.body.email],
         (err,result)=>{
