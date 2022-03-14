@@ -74,6 +74,7 @@ router.get("/logoEnta.png",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/logoEnta.png"));
 })
 
+
 router.get("/logoPlataforma.png",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/logoPlataforma.png"));
 })
@@ -97,6 +98,8 @@ router.get("/criarAnuncio.svg",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/criarAnuncio.svg"));
 })
 
+
+
 //profile
 router.get("/profile.svg",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/profile.svg"));
@@ -104,8 +107,8 @@ router.get("/profile.svg",(req,res)=>{
 
 //dashboard
 
-router.get("/diretorTurma.svg",(req,res)=>{
-    res.sendFile(path.join(srcLocation,"/view/assets/diretorTurma.svg"));
+router.get("/admin.svg",(req,res)=>{
+    res.sendFile(path.join(srcLocation,"/view/assets/admin.svg"));
 })
 
 router.get("/criarAluno.svg",(req,res)=>{
@@ -118,6 +121,10 @@ router.get("/curso.svg",(req,res)=>{
 
 router.get("/turma.svg",(req,res)=>{
     res.sendFile(path.join(srcLocation,"/view/assets/turma.svg"));
+})
+
+router.get("/diretorTurma.svg",(req,res)=>{
+    res.sendFile(path.join(srcLocation,"/view/assets/diretorTurma.svg"));
 })
 
 //duvidas

@@ -8,7 +8,7 @@ const userAuthentication = require("../../userAuthentication");
 const bcryptjs = require("bcryptjs");
 const dbConnection = require("../../dbConnection");
 
-router.post(`/`,(req,res)=>{
+router.post(`/registo`,(req,res)=>{
 
     dbConnection.query(`SELECT COUNT(conta.idConta) AS contagem FROM conta WHERE conta.email = ?`,
     [req.body.email],
